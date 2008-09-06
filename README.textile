@@ -1,1 +1,59 @@
 h1. Power
+
+A command line parser.
+
+Because, lets face it, they all kinda suck some which way or another.
+
+Not that this will be an improvement, just my shot in the dark.
+
+h2. Examples
+
+Or what we'll call examples but is actually ideas for what Power might do...
+
+h3. If Power were for packaging binary runners...
+
+<code><pre>
+  module FooBar
+    class Runner
+      def start(port = 8000, interval = 0.01)
+        aliases :port => :p, :interval => :I
+        # magic
+      end
+    end
+  end
+</pre></code>
+
+Which could be run with:
+
+<code><pre>
+  $ foobar start -p 4890 -I 0.08
+</pre></code>
+
+Then, the binary <code>foobar</code> would be defined something like this
+(possibly):
+
+<code><pre>
+  require 'foo_bar'
+  FooBar::Runner.send(:include, Power)
+  FooBar::Runner.run!(ARGV)
+</pre></code>
+
+We'd need to use Ruby2Ruby or ParseRuby to figure out the params, plus there
+are certain option classes this doesn't allow for: options without default
+values (and those that do have specific types), options that are not
+param-based (ie: the name of the app to generate in <code>rails foo</code>),
+etc.
+
+This is all just a random idea...
+
+h2. The Name
+
+The name could change. Just had to name it something, you know.
+
+h2. License
+
+Copyright (c) 2008 Matt Todd.
+
+Licensed under the MIT license.
+
+TODO: copy license text here or in LICENSE file.
